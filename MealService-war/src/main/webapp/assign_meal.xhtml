@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: azim
+  Date: 4/17/13
+  Time: 10:19 AM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="templates/template.xhtml">
+
+    <ui:define name="title">assign Meal Page</ui:define>
+
+    <ui:define name="navigation">
+
+        <h:form>
+
+            <p:tabMenu activeIndex="5">
+
+                <p:menuitem value="Today's meal" url="show_assign_meal.xhtml"/>
+                <p:menuitem value="Show Foodlist" url="show_food.xhtml"/>
+                <p:menuitem value="Show Meallist" url="show_meal.xhtml"/>
+                <p:menuitem value="Add Food" url="add_food.xhtml"/>
+                <p:menuitem value="Add Meal" url="add_meal.xhtml"/>
+                <p:menuitem value="Assign Meal" url="assign_meal.xhtml"/>
+                <p:menuitem value="Logout" action="#{loginController.logout}"/>
+
+            </p:tabMenu>
+
+        </h:form>
+
+    </ui:define>
+
+    <ui:define name="cbody">
+        <h2>Fill in the form to assign a meal package : </h2>
+        <br/>
+        <h:form id="msg">
+
+            <p:panel>
+
+                <f:facet name="header">Meal Package Form</f:facet>
+
+                <h:panelGrid columns="3" cellspacing="5" style="margin-bottom: 5px">
+
+                    <p:outputLabel styleClass="label" for="items" value="Meal Package : "/>
+                    <p:selectOneMenu id="items"
+                                     value="#{mealController.assignMeal.meal_id}"
+                                     required="true"
+                                     requiredMessage="Error : Must choose one package.">
+
+                        <c:forEach items="#{mealController.mealList}" var="meal">
+
+                            <f:selectItem itemLabel="#{meal.items}"
+                                          itemValue="#{meal.id}"/>
+
+                        </c:forEach>
+
+                    </p:selectOneMenu>
+                    <p:message for="items" styleClass="error"/>
+
+                    <p:outputLabel styleClass="label" for="type" value="Meal type : "/>
+                    <p:selectOneMenu id="type"
+                                     value="#{mealController.assignMeal.meal_time}"
+                                     required="true"
+                                     requiredMessage="Error : Meal type is required.">
+
+                        <f:selectItem itemLabel="Select Option"/>
+                        <f:selectItem itemLabel="Breakfast" itemValue="Breakfast"/>
+                        <f:selectItem itemLabel="Lunch" itemValue="Lunch"/>
+                        <f:selectItem itemLabel="Dinner" itemValue="Dinner"/>
+                        <f:selectItem itemLabel="Other" itemValue="Other"/>
+
+                    </p:selectOneMenu>
+                    <p:message for="type" styleClass="error"/>
+
+                    <p:outputLabel styleClass="label" for="description" value="Food Description : "/>
+                    <p:inputTextarea id="description"
+                                     value="#{mealController.assignMeal.description}"
+                                     rows="2" cols="30"/>
+                    <p:message for="description" styleClass="error"/>
+
+                </h:panelGrid>
+
+                <p:commandButton value="Assign Meal" update="msg" action="#{mealController.assign}"/>
+
+            </p:panel>
+
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+
+</html>

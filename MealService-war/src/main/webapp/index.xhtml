@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: azim
+  Date: 4/17/13
+  Time: 10:19 AM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="templates/template.xhtml">
+
+    <ui:define name="title">Assigned Meal Page</ui:define>
+
+    <ui:define name="navigation">
+
+        <p:tabMenu activeIndex="0">
+
+            <p:menuitem value="Today's meal" url="index.xhtml"/>
+            <p:menuitem value="Login" url="login.xhtml"/>
+
+        </p:tabMenu>
+
+    </ui:define>
+
+    <ui:define name="cbody">
+        <h2>List of meals for the day : </h2>
+        <br/>
+        <p:dataTable styleClass="showData"
+                     border="1"
+                     var="assignMeal"
+                     value="#{mealController.assignMealList}">
+
+            <p:column>
+                <f:facet name="header">Food ID</f:facet>
+                #{assignMeal.meal.items}
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">Food Name</f:facet>
+                #{assignMeal.meal_time}
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">Food Description</f:facet>
+                #{assignMeal.description}
+            </p:column>
+
+        </p:dataTable>
+
+        <br/>
+        <p:panel>
+
+            <f:facet name="header">Comments Form</f:facet>
+            <h:form id="msg">
+
+                <h:panelGrid columns="3" cellspacing="5" style="margin-bottom: 5px">
+
+                    <p:outputLabel styleClass="label" for="name" value="Your Name : "/>
+                    <p:inputText id="name"
+                                 value="#{commentController.comment.name}"
+                                 required="true"
+                                 requiredMessage="Error : Your Name is required"/>
+                    <p:message for="name" styleClass="error"/>
+
+                    <p:outputLabel styleClass="label" for="comment" value="Your Comment : "/>
+                    <p:inputTextarea id="comment"
+                                     value="#{commentController.comment.comment}"
+                                     rows="2" cols="30"
+                                     required="true"
+                                     requiredMessage="Error : Comment is required"/>
+                    <p:message for="comment" styleClass="error"/>
+
+                </h:panelGrid>
+                <p:commandButton value="Add Comment" update="msg" action="#{commentController.add}"/>
+
+            </h:form>
+
+        </p:panel>
+        <br/>
+
+        <c:forEach items="#{commentController.commentList}" var="comment">
+
+            <p:panel style="margin-bottom: 5px;">
+                <f:facet name="header">
+
+                    <div style="float: left; width: 20%">
+                        <p:outputLabel value="Name : "/>
+                        <h:outputText value="#{comment.name}"/>
+                    </div>
+                    <div style="float: right; width: 30%">
+                        <p:outputLabel value="Time : "/>
+                        <h:outputText value="#{comment.time}"/>
+                    </div>
+
+                </f:facet>
+
+                <h:outputText value="#{comment.comment}"/>
+
+            </p:panel>
+
+        </c:forEach>
+
+    </ui:define>
+</ui:composition>
+
+</html>

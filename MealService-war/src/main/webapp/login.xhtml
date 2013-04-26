@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: azim
+  Date: 4/17/13
+  Time: 10:19 AM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="templates/template.xhtml">
+
+    <ui:define name="title">login Page</ui:define>
+
+    <ui:define name="navigation">
+
+        <p:tabMenu activeIndex="1">
+
+            <p:menuitem value="Today's meal" url="index.xhtml"/>
+            <p:menuitem value="Login" url="login.xhtml"/>
+
+        </p:tabMenu>
+
+    </ui:define>
+
+    <ui:define name="cbody">
+        <h2>Please Login : </h2>
+        <br/>
+        <h:form id="msg">
+            <p:panel>
+                <f:facet name="header">Login Form</f:facet>
+                <h:panelGrid columns="3" cellspacing="5" style="margin-bottom: 5px">
+
+                    <p:outputLabel styleClass="label" for="username" value="Username : "/>
+                    <p:inputText id="username"
+                                 value="#{loginController.user.username}"
+                                 required="true"
+                                 requiredMessage="Error : Username is required"/>
+                    <p:message for="username"/>
+
+                    <p:outputLabel styleClass="label" for="password" value="Password : "/>
+                    <p:password id="password"
+                                value="#{loginController.user.password}"
+                                required="true"
+                                requiredMessage="Error : Password is required"/>
+
+                    <p:message for="password"/>
+
+                </h:panelGrid>
+
+                <p:commandButton value="Login" update="msg" action="#{loginController.login}"/>
+
+                <br/>
+                <p:messages globalOnly="true" styleClass="error"/>
+
+            </p:panel>
+
+        </h:form>
+
+
+    </ui:define>
+</ui:composition>
+
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: azim
+  Date: 4/17/13
+  Time: 11:43 AM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>
+        <ui:insert name="title">Simple Practise Project</ui:insert>
+    </title>
+    <h:outputStylesheet library="css" name="styles.css"/>
+</h:head>
+
+<h:body>
+    <div id="container">
+        <div id="head">
+            <ui:insert name="head"><span
+                    style="font: bold; font-size: x-large">Meal Service Management</span></ui:insert>
+        </div>
+        <div id="navigation">
+            <ui:insert name="navigation">Simple Practise Project menu.</ui:insert>
+        </div>
+        <div class="space" style="visibility: hidden"></div>
+        <div id="cbody">
+            <ui:insert name="cbody"/>
+        </div>
+
+        <div class="space"></div>
+
+        <div id="footer">
+            <ui:insert name="footer">Designed by S M Raihan Azim</ui:insert>
+        </div>
+    </div>
+</h:body>
+
+</html>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: azim
+  Date: 4/17/13
+  Time: 10:19 AM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="templates/template.xhtml">
+
+    <ui:define name="title">Meallist Page</ui:define>
+
+    <ui:define name="navigation">
+
+        <h:form>
+
+            <p:tabMenu activeIndex="2">
+
+                <p:menuitem value="Today's meal" url="show_assign_meal.xhtml"/>
+                <p:menuitem value="Show Foodlist" url="show_food.xhtml"/>
+                <p:menuitem value="Show Meallist" url="show_meal.xhtml"/>
+                <p:menuitem value="Add Food" url="add_food.xhtml"/>
+                <p:menuitem value="Add Meal" url="add_meal.xhtml"/>
+                <p:menuitem value="Assign Meal" url="assign_meal.xhtml"/>
+                <p:menuitem value="Logout" action="#{loginController.logout}"/>
+
+            </p:tabMenu>
+
+        </h:form>
+
+    </ui:define>
+
+    <ui:define name="cbody">
+        <h2>List of available meal packages : </h2>
+        <br/>
+        <p:dataTable styleClass="showData" border="1"
+                     var="meal"
+                     value="#{mealController.mealList}"
+                     rowClasses="odd, even">
+
+            <p:column>
+                <f:facet name="header">Meal ID</f:facet>
+                #{meal.id}
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">Meal Items</f:facet>
+                #{meal.items}
+            </p:column>
+
+            <p:column style="text-align: center;">
+                <f:facet name="header">Options</f:facet>
+                <h:form>
+                    <h:commandLink styleClass="link"
+                                   style="color: dodgerblue"
+                                   value="remove"
+                                   action="#{mealController.remove}">
+
+                        <f:param name="id" value="#{meal.id}"/>
+
+                    </h:commandLink>
+                </h:form>
+            </p:column>
+
+        </p:dataTable>
+
+    </ui:define>
+</ui:composition>
+
+</html>
