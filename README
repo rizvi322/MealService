@@ -1,1 +1,9 @@
-This file was created by IntelliJ IDEA 12.1 for binding GitHub repository
+
+
+This project is done using :
+
+    1. Java EE6 features
+    2. Maven 3.0.x
+    3. Primefaces
+    4. Log4j
+    5. Mysql database
